@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import {
   motion,
   useReducedMotion,
@@ -50,11 +51,13 @@ export function Hero({ content }: HeroProps) {
             preload="metadata"
           />
         ) : (
-          // eslint-disable-next-line @next/next/no-img-element -- poster de fallback simples, sem otimização necessária
-          <img
+          <Image
             src={content.video.poster.url}
             alt={content.video.poster.alt}
-            className="h-full w-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
         )}
       </motion.div>

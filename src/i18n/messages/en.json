@@ -16,5 +16,30 @@
   "Hero": {
     "watchReel": "Watch Reel",
     "scrollHint": "Scroll to explore"
+  },
+  "Works": {
+    "watchOnYoutube": "Watch on YouTube",
+    "close": "Close",
+    "previous": "Previous work",
+    "next": "Next work",
+    "open": "Watch {title}"
+  },
+  "Contact": {
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell me a bit about the project",
+    "send": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent! I'll get back to you soon.",
+    "error": "Couldn't send it right now. Please try again.",
+    "nameRequired": "Please enter your name.",
+    "emailInvalid": "Please enter a valid email.",
+    "messageRequired": "Please write a message.",
+    "instagramCta": "Follow on Instagram",
+    "tiktokLabel": "TikTok",
+    "emailCtaLabel": "Send an email"
   }
 }

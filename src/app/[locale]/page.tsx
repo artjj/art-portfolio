@@ -1,8 +1,18 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/sections/hero";
-import { Container } from "@/components/layout/container";
-import { Card } from "@/components/ui/card";
-import { heroContent } from "@/lib/mock-content";
+import { Works } from "@/sections/works";
+import { Styles } from "@/sections/styles";
+import { Timeline } from "@/sections/timeline";
+import { Philosophy } from "@/sections/philosophy";
+import { Contact } from "@/sections/contact";
+import {
+  heroContent,
+  worksContent,
+  stylesContent,
+  timelineContent,
+  philosophyContent,
+  contactContent,
+} from "@/lib/mock-content";
 import type { Locale } from "@/i18n/routing";
 
 export default async function Home({
@@ -12,19 +22,16 @@ export default async function Home({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const t = await getTranslations("Common");
+  const l = locale as Locale;
 
   return (
     <main>
-      <Hero content={heroContent[locale as Locale]} />
-
-      <Container className="flex justify-center py-24">
-        <Card className="text-body-sm text-fg-muted max-w-sm text-center">
-          {t("comingSoon")} Trabalhos, Estilos, Trajetória, Filosofia e Contato
-          chegam na Fase 3.
-        </Card>
-      </Container>
+      <Hero content={heroContent[l]} />
+      <Works works={worksContent[l]} />
+      <Styles styles={stylesContent[l]} />
+      <Timeline items={timelineContent[l]} />
+      <Philosophy content={philosophyContent[l]} />
+      <Contact content={contactContent[l]} />
     </main>
   );
 }
