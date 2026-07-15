@@ -2,5 +2,19 @@
   "Common": {
     "siteName": "ART",
     "comingSoon": "Em construção."
+  },
+  "Nav": {
+    "works": "Trabalhos",
+    "styles": "Estilos",
+    "timeline": "Trajetória",
+    "philosophy": "Filosofia",
+    "contact": "Contato",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "language": "Idioma"
+  },
+  "Hero": {
+    "watchReel": "Assistir Reel",
+    "scrollHint": "Rolar para explorar"
   }
 }

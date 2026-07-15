@@ -8,8 +8,6 @@ export interface HeroContent {
   headline: string;
   tagline: string;
   video: VideoAsset;
-  watchReelLabel: string;
-  contactLabel: string;
 }
 
 export interface Work {

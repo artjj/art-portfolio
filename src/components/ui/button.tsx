@@ -1,11 +1,7 @@
-import { type ButtonHTMLAttributes, forwardRef } from "react";
+import { type AnchorHTMLAttributes, type ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant = "primary" | "secondary";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
-}
 
 const base =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-6 text-body font-medium transition-all duration-200 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50";
@@ -17,16 +13,30 @@ const variants: Record<ButtonVariant, string> = {
     "border border-border bg-transparent text-fg hover:border-accent hover:text-accent",
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", ...props }, ref) => {
-    return (
-      <button
-        ref={ref}
-        className={cn(base, variants[variant], className)}
-        {...props}
-      />
-    );
-  },
-);
+type ButtonAsButton = ButtonHTMLAttributes<HTMLButtonElement> & {
+  href?: undefined;
+  variant?: ButtonVariant;
+};
 
-Button.displayName = "Button";
+type ButtonAsAnchor = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string;
+  variant?: ButtonVariant;
+};
+
+type ButtonProps = ButtonAsButton | ButtonAsAnchor;
+
+// Componente polimórfico: com `href` renderiza <a>, sem `href` renderiza
+// <button> — evita aninhar elementos interativos (ex.: <button> dentro de <a>).
+export function Button({
+  className,
+  variant = "primary",
+  ...props
+}: ButtonProps) {
+  const classes = cn(base, variants[variant], className);
+
+  if (props.href !== undefined) {
+    return <a className={classes} {...props} />;
+  }
+
+  return <button className={classes} {...props} />;
+}

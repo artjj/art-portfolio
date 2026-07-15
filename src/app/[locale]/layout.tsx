@@ -5,6 +5,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Navbar } from "@/components/layout/navbar";
 import "../globals.css";
 
 const anton = Anton({
@@ -53,7 +54,10 @@ export default async function LocaleLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <NextIntlClientProvider>
+            <Navbar />
+            {children}
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>
