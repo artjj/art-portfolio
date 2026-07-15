@@ -1,0 +1,8 @@
+.next
+node_modules
+public
+
+# documentação fonte-da-verdade — não reformatar
+docs/
+CLAUDE.md
+README.md
