@@ -44,3 +44,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# mídia bruta enviada para processamento (matriz, não os arquivos otimizados
+# em public/) — vídeos originais em MOV/4K, etc.
+/hero/
+/assets/
