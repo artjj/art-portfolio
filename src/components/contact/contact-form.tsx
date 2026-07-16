@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
+import Script from "next/script";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -21,12 +22,21 @@ function buildSchema(t: (key: string) => string) {
 const inputClass =
   "w-full border border-border bg-transparent px-4 py-3 text-body outline-none transition-shadow duration-200 focus:border-accent focus:shadow-[0_0_0_3px_var(--color-accent)]";
 
+const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+declare global {
+  interface Window {
+    onTurnstileVerify?: (token: string) => void;
+  }
+}
+
 export function ContactForm() {
   const t = useTranslations("Contact");
   const schema = useMemo(() => buildSchema(t), [t]);
   const [status, setStatus] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const {
     register,
@@ -35,12 +45,24 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
-  // Envio real (Resend + Turnstile) entra na Fase 4 — por ora só simula.
-  const onSubmit = async () => {
+  const onSubmit = async (values: FormValues) => {
     setStatus("sending");
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setStatus("success");
-    reset();
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, turnstileToken }),
+      });
+
+      if (!response.ok) throw new Error("request_failed");
+
+      setStatus("success");
+      reset();
+      setTurnstileToken(null);
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (status === "success") {
@@ -127,6 +149,25 @@ export function ContactForm() {
           </p>
         )}
       </div>
+
+      {turnstileSiteKey && (
+        <>
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            async
+            defer
+            onReady={() => {
+              window.onTurnstileVerify = (token: string) =>
+                setTurnstileToken(token);
+            }}
+          />
+          <div
+            className="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-callback="onTurnstileVerify"
+          />
+        </>
+      )}
 
       {status === "error" && (
         <p className="text-body-sm text-red-500">{t("error")}</p>

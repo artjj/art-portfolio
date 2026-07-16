@@ -6,13 +6,13 @@ import { Timeline } from "@/sections/timeline";
 import { Philosophy } from "@/sections/philosophy";
 import { Contact } from "@/sections/contact";
 import {
-  heroContent,
-  worksContent,
-  stylesContent,
-  timelineContent,
-  philosophyContent,
-  contactContent,
-} from "@/lib/mock-content";
+  getContactContent,
+  getHeroContent,
+  getPhilosophyContent,
+  getStylesContent,
+  getTimelineContent,
+  getWorksContent,
+} from "@/lib/content";
 import type { Locale } from "@/i18n/routing";
 
 export default async function Home({
@@ -24,14 +24,24 @@ export default async function Home({
   setRequestLocale(locale);
   const l = locale as Locale;
 
+  const [hero, works, styles, timeline, philosophy, contact] =
+    await Promise.all([
+      getHeroContent(l),
+      getWorksContent(l),
+      getStylesContent(l),
+      getTimelineContent(l),
+      getPhilosophyContent(l),
+      getContactContent(l),
+    ]);
+
   return (
     <main>
-      <Hero content={heroContent[l]} />
-      <Works works={worksContent[l]} />
-      <Styles styles={stylesContent[l]} />
-      <Timeline items={timelineContent[l]} />
-      <Philosophy content={philosophyContent[l]} />
-      <Contact content={contactContent[l]} />
+      <Hero content={hero} />
+      <Works works={works} />
+      <Styles styles={styles} />
+      <Timeline items={timeline} />
+      <Philosophy content={philosophy} />
+      <Contact content={contact} />
     </main>
   );
 }
