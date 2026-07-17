@@ -21,6 +21,9 @@
     "watchReel": "Assistir Reel",
     "scrollHint": "Rolar para explorar"
   },
+  "Styles": {
+    "complementaryTitle": "Estudos complementares"
+  },
   "Works": {
     "watchOnYoutube": "Assistir no YouTube",
     "close": "Fechar",

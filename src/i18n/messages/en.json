@@ -21,6 +21,9 @@
     "watchReel": "Watch Reel",
     "scrollHint": "Scroll to explore"
   },
+  "Styles": {
+    "complementaryTitle": "Complementary studies"
+  },
   "Works": {
     "watchOnYoutube": "Watch on YouTube",
     "close": "Close",
