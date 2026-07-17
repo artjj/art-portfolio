@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 import type {
+  Choreography,
   ContactContent,
   DanceStyle,
   HeroContent,
@@ -37,6 +38,22 @@ export const heroContent: Record<Locale, HeroContent> = {
     },
   },
 };
+
+// PLACEHOLDER — coreografias do ARTSIDE ainda não fornecidas pelo Arthur.
+// Thumbnail e link são genéricos só para demonstrar o layout da galeria;
+// substituir por conteúdo real (ver instruções no fim do arquivo/README).
+function artsidePlaceholderChoreographies(labelPrefix: string): Choreography[] {
+  return [1, 2, 3].map((n) => ({
+    title: `${labelPrefix} ${n}`,
+    thumbnail: {
+      url: "/works/artside-placeholder.svg",
+      alt: `${labelPrefix} ${n} — thumbnail em breve`,
+      width: 1200,
+      height: 1500,
+    },
+    url: "#",
+  }));
+}
 
 // Traduções EN dos campos de texto ainda não foram revisadas pelo Arthur —
 // conferir antes de publicar.
@@ -86,6 +103,21 @@ export const worksContent: Record<Locale, Work[]> = {
         height: 720,
       },
     },
+    {
+      id: "artside",
+      title: "ARTSIDE",
+      context:
+        "Projeto contínuo de coreografias autorais — uma coleção que cresce ao longo do tempo.",
+      thumbnail: {
+        url: "/works/artside-placeholder.svg",
+        alt: "ARTSIDE — capa em breve",
+        width: 1200,
+        height: 1500,
+      },
+      choreographies: artsidePlaceholderChoreographies(
+        "[Placeholder] Coreografia",
+      ),
+    },
   ],
   en: [
     {
@@ -131,6 +163,21 @@ export const worksContent: Record<Locale, Work[]> = {
         width: 1280,
         height: 720,
       },
+    },
+    {
+      id: "artside",
+      title: "ARTSIDE",
+      context:
+        "An ongoing project of original choreographies — a collection that grows over time.",
+      thumbnail: {
+        url: "/works/artside-placeholder.svg",
+        alt: "ARTSIDE — cover coming soon",
+        width: 1200,
+        height: 1500,
+      },
+      choreographies: artsidePlaceholderChoreographies(
+        "[Placeholder] Choreography",
+      ),
     },
   ],
 };

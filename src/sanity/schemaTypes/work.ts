@@ -16,8 +16,8 @@ export const work = defineType({
       name: "youtubeId",
       title: "ID do vídeo no YouTube",
       type: "string",
-      description: "Apenas o ID (ex.: PJemSGbkqM0), não a URL completa.",
-      validation: (Rule) => Rule.required(),
+      description:
+        "Apenas o ID (ex.: PJemSGbkqM0), não a URL completa. Deixar vazio para trabalhos-coleção (ex.: ARTSIDE), que usam Coreografias.",
     }),
     defineField({
       name: "previewVideo",
@@ -31,6 +31,41 @@ export const work = defineType({
       type: "image",
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "choreographies",
+      title: "Coreografias (trabalhos-coleção, ex.: ARTSIDE)",
+      description:
+        "Preencher apenas para trabalhos do tipo coleção. Se preenchido, a galeria interna é exibida em vez do vídeo do YouTube.",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "choreography",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Título",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "thumbnail",
+              title: "Thumbnail",
+              type: "image",
+              options: { hotspot: true },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "url",
+              title: "Link (Instagram Reels)",
+              type: "url",
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: { select: { title: "title", media: "thumbnail" } },
+        },
+      ],
     }),
     defineField({
       name: "order",

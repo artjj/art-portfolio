@@ -64,22 +64,44 @@ export async function getWorksContent(locale: Locale): Promise<Work[]> {
       id: item.id,
       title: item.title,
       context: item.context,
-      youtubeId: item.youtubeId,
-      previewVideo: {
-        url: item.previewVideoUrl ?? "",
-        poster: {
-          url: item.thumbnailUrl,
-          alt: item.title,
-          width: item.thumbnailWidth ?? 1920,
-          height: item.thumbnailHeight ?? 1080,
-        },
-      },
+      youtubeId: item.youtubeId ?? undefined,
+      previewVideo: item.previewVideoUrl
+        ? {
+            url: item.previewVideoUrl,
+            poster: {
+              url: item.thumbnailUrl,
+              alt: item.title,
+              width: item.thumbnailWidth ?? 1920,
+              height: item.thumbnailHeight ?? 1080,
+            },
+          }
+        : undefined,
       thumbnail: {
         url: item.thumbnailUrl,
         alt: item.title,
         width: item.thumbnailWidth ?? 1920,
         height: item.thumbnailHeight ?? 1080,
       },
+      choreographies: Array.isArray(item.choreographies)
+        ? item.choreographies.map(
+            (choreography: {
+              title: string;
+              thumbnailUrl: string;
+              thumbnailWidth?: number;
+              thumbnailHeight?: number;
+              url: string;
+            }) => ({
+              title: choreography.title,
+              thumbnail: {
+                url: choreography.thumbnailUrl,
+                alt: choreography.title,
+                width: choreography.thumbnailWidth ?? 1200,
+                height: choreography.thumbnailHeight ?? 1500,
+              },
+              url: choreography.url,
+            }),
+          )
+        : undefined,
     }));
   } catch {
     return worksMock[locale];

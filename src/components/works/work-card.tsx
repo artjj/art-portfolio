@@ -45,16 +45,18 @@ export function WorkCard({ work, onOpen, openLabel }: WorkCardProps) {
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover"
         />
-        <video
-          ref={videoRef}
-          src={work.previewVideo.url}
-          poster={work.previewVideo.poster.url}
-          muted
-          loop
-          playsInline
-          preload="none"
-          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100"
-        />
+        {work.previewVideo && (
+          <video
+            ref={videoRef}
+            src={work.previewVideo.url}
+            poster={work.previewVideo.poster.url}
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100"
+          />
+        )}
       </m.div>
 
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent" />
@@ -63,7 +65,7 @@ export function WorkCard({ work, onOpen, openLabel }: WorkCardProps) {
         <span className="font-display text-h3 tracking-tight uppercase">
           {work.title}
         </span>
-        <span className="text-body-sm max-w-sm text-white/80 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100">
+        <span className="text-body-sm max-h-0 max-w-sm overflow-hidden text-white/80 opacity-0 transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100 group-focus:max-h-20 group-focus:opacity-100">
           {work.context}
         </span>
       </div>

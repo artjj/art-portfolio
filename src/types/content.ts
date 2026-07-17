@@ -10,13 +10,26 @@ export interface HeroContent {
   video: VideoAsset;
 }
 
+// Uma coreografia dentro de um trabalho-coleção (ex.: ARTSIDE) — só
+// thumbnail + título + link, sem os campos de um trabalho de vídeo único.
+export interface Choreography {
+  title: string;
+  thumbnail: ImageAsset;
+  url: string;
+}
+
 export interface Work {
   id: string;
   title: string;
   context: string;
-  youtubeId: string;
-  previewVideo: VideoAsset;
+  // Ausentes em trabalhos-coleção (ex.: ARTSIDE), que usam `choreographies`
+  // em vez de um único vídeo.
+  youtubeId?: string;
+  previewVideo?: VideoAsset;
   thumbnail: ImageAsset;
+  // Presente apenas em trabalhos-coleção — abre uma galeria interna em vez
+  // do modal de vídeo único.
+  choreographies?: Choreography[];
 }
 
 export type DanceStyleId = "dancehall" | "krump" | "hiphop" | "popping";

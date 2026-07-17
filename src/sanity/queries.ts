@@ -25,6 +25,13 @@ export const worksQuery = /* groq */ `
   "thumbnailUrl": thumbnail.asset->url,
   "thumbnailWidth": thumbnail.asset->metadata.dimensions.width,
   "thumbnailHeight": thumbnail.asset->metadata.dimensions.height,
+  choreographies[]{
+    title,
+    "thumbnailUrl": thumbnail.asset->url,
+    "thumbnailWidth": thumbnail.asset->metadata.dimensions.width,
+    "thumbnailHeight": thumbnail.asset->metadata.dimensions.height,
+    url,
+  },
 }`;
 
 export const stylesQuery = /* groq */ `

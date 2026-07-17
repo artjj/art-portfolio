@@ -7,6 +7,7 @@ import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/motion/reveal";
 import { WorkCard } from "@/components/works/work-card";
 import { WorkModal } from "@/components/works/work-modal";
+import { ChoreographyGalleryModal } from "@/components/works/choreography-gallery-modal";
 
 interface WorksProps {
   works: Work[];
@@ -18,6 +19,7 @@ export function Works({ works }: WorksProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const activeWork = activeIndex === null ? null : works[activeIndex];
+  const isCollection = !!activeWork?.choreographies;
 
   return (
     <section id="works" className="py-24 md:py-32">
@@ -41,7 +43,7 @@ export function Works({ works }: WorksProps) {
       </Container>
 
       <WorkModal
-        work={activeWork}
+        work={isCollection ? null : activeWork}
         onClose={() => setActiveIndex(null)}
         onPrev={() => setActiveIndex((i) => (i !== null && i > 0 ? i - 1 : i))}
         onNext={() =>
@@ -51,6 +53,10 @@ export function Works({ works }: WorksProps) {
         }
         hasPrev={activeIndex !== null && activeIndex > 0}
         hasNext={activeIndex !== null && activeIndex < works.length - 1}
+      />
+      <ChoreographyGalleryModal
+        work={isCollection ? activeWork : null}
+        onClose={() => setActiveIndex(null)}
       />
     </section>
   );
