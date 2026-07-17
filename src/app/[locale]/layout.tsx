@@ -9,7 +9,6 @@ import { routing, type Locale } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { Navbar } from "@/components/layout/navbar";
-import { CustomCursor } from "@/components/cursor/custom-cursor";
 import { getContactContent } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 import "../globals.css";
@@ -113,7 +112,6 @@ export default async function LocaleLayout({
               <Navbar />
               {children}
             </NextIntlClientProvider>
-            <CustomCursor />
           </MotionProvider>
         </ThemeProvider>
         <Analytics />

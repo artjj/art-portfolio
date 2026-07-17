@@ -136,9 +136,42 @@ body {
   animation: hero-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
-/* Cursor personalizado — só ativo em ponteiros finos com hover (desktop
-   real), nunca em touch. Ver src/components/cursor/custom-cursor.tsx. */
-html.custom-cursor-active,
-html.custom-cursor-active * {
-  cursor: none;
+/* Cursor personalizado (seta) — puro CSS, sem JS/listener de mousemove.
+   Escopado a ponteiros finos com hover (mouse real); fora desse media
+   query nem essas regras existem, então touch sempre usa o cursor nativo.
+   O `auto` no fim de cada valor é o fallback nativo caso o SVG não
+   carregue ou não seja suportado (não há chance de "sumir" o cursor). */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor:
+      url("/cursor/arrow.svg") 2 1,
+      auto;
+  }
+
+  a,
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  label[for],
+  summary {
+    cursor:
+      url("/cursor/arrow-interactive.svg") 2 1,
+      pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"],
+  input:disabled,
+  textarea:disabled {
+    cursor: not-allowed;
+  }
+
+  input:not(:disabled):not([type="checkbox"]):not([type="radio"]):not(
+      [type="range"]
+    ):not([type="submit"]):not([type="button"]):not([type="file"]):not(
+      [type="color"]
+    ),
+  textarea:not(:disabled),
+  [contenteditable="true"] {
+    cursor: text;
+  }
 }
