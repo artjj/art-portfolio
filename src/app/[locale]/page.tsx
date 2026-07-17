@@ -1,10 +1,6 @@
+import dynamic from "next/dynamic";
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/sections/hero";
-import { Works } from "@/sections/works";
-import { Styles } from "@/sections/styles";
-import { Timeline } from "@/sections/timeline";
-import { Philosophy } from "@/sections/philosophy";
-import { Contact } from "@/sections/contact";
 import {
   getContactContent,
   getHeroContent,
@@ -14,6 +10,20 @@ import {
   getWorksContent,
 } from "@/lib/content";
 import type { Locale } from "@/i18n/routing";
+
+// Abaixo da dobra — code-split para não competir com a hidratação do
+// Hero (LCP) na carga inicial (doc 04 §9: Performance é Design).
+const Works = dynamic(() => import("@/sections/works").then((m) => m.Works));
+const Styles = dynamic(() => import("@/sections/styles").then((m) => m.Styles));
+const Timeline = dynamic(() =>
+  import("@/sections/timeline").then((m) => m.Timeline),
+);
+const Philosophy = dynamic(() =>
+  import("@/sections/philosophy").then((m) => m.Philosophy),
+);
+const Contact = dynamic(() =>
+  import("@/sections/contact").then((m) => m.Contact),
+);
 
 export default async function Home({
   params,

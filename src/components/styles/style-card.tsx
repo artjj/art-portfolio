@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { DanceStyle } from "@/types/content";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,7 @@ export function StyleCard({ style, className }: StyleCardProps) {
     <div className={cn("group relative overflow-hidden", className)}>
       {/* Placeholder em SVG — next/image bloqueia SVG por padrão. Trocar
           para next/image assim que as fotos reais (JPG/PNG) chegarem. */}
-      <motion.img
+      <m.img
         src={style.image.url}
         alt={style.image.alt}
         className="h-full w-full object-cover"

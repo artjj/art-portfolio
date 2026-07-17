@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, type TouchEvent } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import type { Work } from "@/types/content";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 interface WorkModalProps {
   work: Work | null;
@@ -25,8 +26,12 @@ export function WorkModal({
   hasNext,
 }: WorkModalProps) {
   const t = useTranslations("Works");
+  const containerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const touchStartX = useRef<number | null>(null);
+  const reduceMotion = useReducedMotion();
+
+  useFocusTrap(containerRef, !!work);
 
   useEffect(() => {
     if (!work) return;
@@ -62,24 +67,36 @@ export function WorkModal({
   return (
     <AnimatePresence>
       {work && (
-        <motion.div
+        <m.div
+          ref={containerRef}
           role="dialog"
           aria-modal="true"
           aria-label={work.title}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: reduceMotion ? 0 : 0.3 }}
           onClick={onClose}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
           className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-10"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 16 }}
+          <m.div
+            initial={{
+              opacity: 0,
+              scale: reduceMotion ? 1 : 0.96,
+              y: reduceMotion ? 0 : 16,
+            }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 16 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            exit={{
+              opacity: 0,
+              scale: reduceMotion ? 1 : 0.96,
+              y: reduceMotion ? 0 : 16,
+            }}
+            transition={{
+              duration: reduceMotion ? 0 : 0.35,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             onClick={(event) => event.stopPropagation()}
             className="flex w-full max-w-4xl flex-col gap-4"
           >
@@ -121,7 +138,7 @@ export function WorkModal({
                 </button>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           <button
             ref={closeButtonRef}
@@ -132,7 +149,7 @@ export function WorkModal({
           >
             ×
           </button>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

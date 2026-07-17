@@ -20,7 +20,7 @@ function buildSchema(t: (key: string) => string) {
 }
 
 const inputClass =
-  "w-full border border-border bg-transparent px-4 py-3 text-body outline-none transition-shadow duration-200 focus:border-accent focus:shadow-[0_0_0_3px_var(--color-accent)]";
+  "w-full border border-border bg-transparent px-4 py-3 text-body outline-none transition-shadow duration-200 focus:border-accent-text focus:shadow-[0_0_0_3px_var(--color-accent-text)]";
 
 const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 

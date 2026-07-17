@@ -1,12 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { PhilosophyContent } from "@/types/content";
 import { Container } from "@/components/layout/container";
 
@@ -30,7 +25,7 @@ export function Philosophy({ content }: PhilosophyProps) {
         <div className="relative aspect-[4/5] w-full overflow-hidden md:order-2">
           {/* Placeholder em SVG — next/image bloqueia SVG por padrão. Trocar
               para next/image assim que a foto real (JPG/PNG) chegar. */}
-          <motion.img
+          <m.img
             src={content.image.url}
             alt={content.image.alt}
             className="absolute inset-0 h-[120%] w-full object-cover"

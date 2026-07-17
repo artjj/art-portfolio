@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { navLinks } from "@/lib/nav-links";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
@@ -17,7 +18,10 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
   const t = useTranslations("Nav");
   const locale = useLocale();
   const reduceMotion = useReducedMotion();
+  const containerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useFocusTrap(containerRef, open);
 
   useEffect(() => {
     if (!open) return;
@@ -39,7 +43,8 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
+          ref={containerRef}
           role="dialog"
           aria-modal="true"
           initial={{ opacity: 0 }}
@@ -62,7 +67,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
 
           <nav className="flex flex-1 flex-col items-center justify-center gap-8">
             {navLinks.map((link, index) => (
-              <motion.a
+              <m.a
                 key={link.href}
                 href={link.href}
                 onClick={onClose}
@@ -75,7 +80,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 className="font-display text-display-l uppercase"
               >
                 {t(link.labelKey)}
-              </motion.a>
+              </m.a>
             ))}
           </nav>
 
@@ -96,7 +101,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               </Link>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

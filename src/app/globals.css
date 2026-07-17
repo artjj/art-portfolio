@@ -2,8 +2,6 @@
 
 /*
  * Dark é o tema padrão/identidade (doc 03/04 — referências Arcane/Riot Games).
- * O bloco [data-theme="light"] é a variante clara, ainda não validada
- * visualmente — ajustar no checkpoint da Fase 1.
  * --hero-* nunca mudam com o tema: o Hero é ambientação fixa (doc 05).
  */
 :root {
@@ -15,6 +13,11 @@
   --color-accent: #1e3a8a;
   --color-accent-hover: #2748a8;
   --color-accent-fg: #f5f5f7;
+  /* Variante clara do accent p/ texto/borda/foco sobre fundo escuro — o
+     azul profundo (#1e3a8a) só dá 1.91:1 de contraste em #0a0a0b, abaixo
+     do mínimo AA (4.5:1 texto / 3:1 UI). Usar accent normal só como fill
+     sólido (bg-accent + accent-fg), nunca como texto/borda fina. */
+  --color-accent-text: #3b82f6;
 
   --hero-overlay-from: rgba(0, 0, 0, 0.8);
   --hero-overlay-to: rgba(0, 0, 0, 0.15);
@@ -28,6 +31,7 @@
     --color-fg: #0a0a0b;
     --color-fg-muted: #52525b;
     --color-border: #e4e4e7;
+    --color-accent-text: #1e3a8a;
   }
 }
 
@@ -37,6 +41,7 @@
   --color-fg: #f5f5f7;
   --color-fg-muted: #a1a1aa;
   --color-border: #27272a;
+  --color-accent-text: #3b82f6;
 }
 
 [data-theme="light"] {
@@ -45,6 +50,7 @@
   --color-fg: #0a0a0b;
   --color-fg-muted: #52525b;
   --color-border: #e4e4e7;
+  --color-accent-text: #1e3a8a;
 }
 
 @theme inline {
@@ -56,6 +62,7 @@
   --color-accent: var(--color-accent);
   --color-accent-hover: var(--color-accent-hover);
   --color-accent-fg: var(--color-accent-fg);
+  --color-accent-text: var(--color-accent-text);
 
   --font-display: var(--font-anton);
   --font-body: var(--font-inter);
@@ -103,6 +110,35 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent-text);
   outline-offset: 2px;
+}
+
+/* Entrada do Hero em CSS puro (não framer-motion): o H1 é o elemento de
+   LCP da página, e uma entrada controlada por JS fica invisível até a
+   hidratação terminar, atrasando o LCP em segundos em conexões lentas. */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter-1 {
+  animation: hero-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-2 {
+  animation: hero-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* Cursor personalizado — só ativo em ponteiros finos com hover (desktop
+   real), nunca em touch. Ver src/components/cursor/custom-cursor.tsx. */
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none;
 }

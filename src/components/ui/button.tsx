@@ -10,7 +10,7 @@ const variants: Record<ButtonVariant, string> = {
   primary:
     "bg-accent text-accent-fg hover:bg-accent-hover hover:-translate-y-0.5 hover:shadow-lg",
   secondary:
-    "border border-border bg-transparent text-fg hover:border-accent hover:text-accent",
+    "border border-border bg-transparent text-fg hover:border-accent-text hover:text-accent-text",
 };
 
 type ButtonAsButton = ButtonHTMLAttributes<HTMLButtonElement> & {

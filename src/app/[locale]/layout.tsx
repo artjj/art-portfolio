@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Anton, Inter } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import { Navbar } from "@/components/layout/navbar";
+import { CustomCursor } from "@/components/cursor/custom-cursor";
 import { getContactContent } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 import "../globals.css";
@@ -94,7 +97,8 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${anton.variable} ${inter.variable} antialiased`}>
-        <script
+        <Script
+          id="person-jsonld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
@@ -104,10 +108,13 @@ export default async function LocaleLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>
-            <Navbar />
-            {children}
-          </NextIntlClientProvider>
+          <MotionProvider>
+            <NextIntlClientProvider>
+              <Navbar />
+              {children}
+            </NextIntlClientProvider>
+            <CustomCursor />
+          </MotionProvider>
         </ThemeProvider>
         <Analytics />
       </body>

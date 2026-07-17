@@ -29,7 +29,7 @@ export function Timeline({ items }: TimelineProps) {
                 className="relative min-w-0 flex-1 pl-8 md:min-w-52 md:pt-8 md:pl-0"
               >
                 <span className="bg-accent absolute top-1 left-0 h-3 w-3 rounded-full md:top-0" />
-                <span className="text-body-sm text-accent font-medium">
+                <span className="text-body-sm text-accent-text font-medium">
                   {item.year}
                 </span>
                 <h3 className="font-display text-h3 mt-1 tracking-tight uppercase">

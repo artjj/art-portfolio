@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { Work } from "@/types/content";
 
 interface WorkCardProps {
@@ -33,7 +33,7 @@ export function WorkCard({ work, onOpen, openLabel }: WorkCardProps) {
       aria-label={openLabel}
       className="group relative aspect-[4/5] w-full overflow-hidden text-left"
     >
-      <motion.div
+      <m.div
         className="absolute inset-0"
         whileHover={{ scale: 1.04 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -55,7 +55,7 @@ export function WorkCard({ work, onOpen, openLabel }: WorkCardProps) {
           preload="none"
           className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100"
         />
-      </motion.div>
+      </m.div>
 
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent" />
 
