@@ -22,9 +22,12 @@ export function Styles({ styles }: StylesProps) {
     <section id="styles" className="py-24 md:py-32">
       <Container>
         <Reveal>
-          <h2 className="font-display text-h1 mb-8 tracking-tight uppercase">
+          <h2 className="font-display text-h1 tracking-tight uppercase">
             {nav("styles")}
           </h2>
+          <p className="text-body-lg text-fg-muted mt-3 mb-8 max-w-2xl">
+            {t("intro")}
+          </p>
         </Reveal>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
