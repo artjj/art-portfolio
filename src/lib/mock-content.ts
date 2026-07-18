@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 import type {
+  Achievement,
   Choreography,
   ContactContent,
   DanceStyle,
@@ -341,6 +342,31 @@ export const timelineContent: Record<Locale, TimelineItem[]> = {
       year: 2024,
       title: "[Placeholder] Milestone TBD",
       description: "Short description TBD.",
+    },
+  ],
+};
+
+// PLACEHOLDER — nenhuma conquista real cadastrada ainda. Item único só
+// para demonstrar o layout; não representa competição/colocação/ano reais.
+export const achievementsContent: Record<Locale, Achievement[]> = {
+  pt: [
+    {
+      id: "achievement-placeholder-1",
+      // `competition` não é localizado (nome próprio, igual em PT/EN) —
+      // por isso o marcador de placeholder aqui fica só em "[Placeholder]".
+      competition: "[Placeholder]",
+      placement: "Colocação a definir",
+      year: 2026,
+      awardType: "special",
+    },
+  ],
+  en: [
+    {
+      id: "achievement-placeholder-1",
+      competition: "[Placeholder]",
+      placement: "Placement TBD",
+      year: 2026,
+      awardType: "special",
     },
   ],
 };

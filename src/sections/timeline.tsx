@@ -1,24 +1,29 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import type { TimelineItem } from "@/types/content";
+import type { Achievement, TimelineItem } from "@/types/content";
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/motion/reveal";
+import { AchievementsPanel } from "@/components/timeline/achievements-panel";
 
 interface TimelineProps {
   items: TimelineItem[];
+  achievements: Achievement[];
 }
 
-export function Timeline({ items }: TimelineProps) {
+export function Timeline({ items, achievements }: TimelineProps) {
   const nav = useTranslations("Nav");
 
   return (
     <section id="timeline" className="py-24 md:py-32">
       <Container>
         <Reveal>
-          <h2 className="font-display text-h1 mb-16 tracking-tight uppercase">
-            {nav("timeline")}
-          </h2>
+          <div className="mb-16 flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
+            <h2 className="font-display text-h1 tracking-tight uppercase">
+              {nav("timeline")}
+            </h2>
+            <AchievementsPanel achievements={achievements} />
+          </div>
 
           <ol className="relative flex flex-col gap-10 md:flex-row md:gap-8 md:overflow-x-auto md:pb-4">
             <div className="bg-border absolute top-1.5 bottom-0 left-1.5 w-px md:top-1.5 md:right-0 md:bottom-auto md:left-0 md:h-px md:w-auto" />

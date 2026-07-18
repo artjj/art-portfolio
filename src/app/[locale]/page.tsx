@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/sections/hero";
 import {
+  getAchievementsContent,
   getContactContent,
   getHeroContent,
   getPhilosophyContent,
@@ -34,12 +35,13 @@ export default async function Home({
   setRequestLocale(locale);
   const l = locale as Locale;
 
-  const [hero, works, styles, timeline, philosophy, contact] =
+  const [hero, works, styles, timeline, achievements, philosophy, contact] =
     await Promise.all([
       getHeroContent(l),
       getWorksContent(l),
       getStylesContent(l),
       getTimelineContent(l),
+      getAchievementsContent(l),
       getPhilosophyContent(l),
       getContactContent(l),
     ]);
@@ -49,7 +51,7 @@ export default async function Home({
       <Hero content={hero} />
       <Works works={works} />
       <Styles styles={styles} />
-      <Timeline items={timeline} />
+      <Timeline items={timeline} achievements={achievements} />
       <Philosophy content={philosophy} />
       <Contact content={contact} />
     </main>

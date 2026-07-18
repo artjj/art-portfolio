@@ -54,6 +54,21 @@ export const timelineQuery = /* groq */ `
   "description": description[$locale],
 }`;
 
+export const achievementsQuery = /* groq */ `
+*[_type == "achievement" && isVisible != false] | order(order asc, year desc){
+  "id": _id,
+  competition,
+  "placement": placement[$locale],
+  year,
+  awardType,
+  "category": category[$locale],
+  "imageUrl": image.asset->url,
+  "imageAlt": coalesce(category[$locale], competition),
+  "imageWidth": image.asset->metadata.dimensions.width,
+  "imageHeight": image.asset->metadata.dimensions.height,
+  externalUrl,
+}`;
+
 export const philosophyQuery = /* groq */ `
 *[_type == "philosophy"][0]{
   "quote": quote[$locale],

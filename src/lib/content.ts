@@ -1,5 +1,6 @@
 import { sanityClient } from "@/sanity/client";
 import {
+  achievementsQuery,
   contactQuery,
   heroQuery,
   philosophyQuery,
@@ -9,6 +10,8 @@ import {
 } from "@/sanity/queries";
 import type { Locale } from "@/i18n/routing";
 import type {
+  Achievement,
+  AwardType,
   ContactContent,
   DanceStyle,
   HeroContent,
@@ -17,6 +20,7 @@ import type {
   Work,
 } from "@/types/content";
 import {
+  achievementsContent as achievementsMock,
   contactContent as contactMock,
   heroContent as heroMock,
   philosophyContent as philosophyMock,
@@ -143,6 +147,52 @@ export async function getTimelineContent(
     return data as TimelineItem[];
   } catch {
     return timelineMock[locale];
+  }
+}
+
+const AWARD_TYPES: AwardType[] = ["first", "second", "third", "special"];
+
+// Defensivo — documentos antigos/editados errado no Sanity podem não ter
+// (ou ter um valor inválido para) awardType; nunca deixar o front quebrar
+// por isso, só cair num ícone genérico.
+function toAwardType(value: unknown): AwardType {
+  return AWARD_TYPES.includes(value as AwardType)
+    ? (value as AwardType)
+    : "special";
+}
+
+// Diferente das demais: uma lista vazia é um estado válido (seção
+// "Estados" — sem conquistas cadastradas, não deve renderizar o bloco),
+// então só cai pro mock se o Sanity não estiver configurado ou a busca
+// falhar — nunca por a lista vir vazia.
+export async function getAchievementsContent(
+  locale: Locale,
+): Promise<Achievement[]> {
+  if (!sanityClient) return achievementsMock[locale];
+
+  try {
+    const data = await sanityClient.fetch(achievementsQuery, { locale });
+    if (!Array.isArray(data)) return achievementsMock[locale];
+
+    return data.map((item): Achievement => ({
+      id: item.id,
+      competition: item.competition,
+      placement: item.placement,
+      year: item.year,
+      awardType: toAwardType(item.awardType),
+      category: item.category ?? undefined,
+      image: item.imageUrl
+        ? {
+            url: item.imageUrl,
+            alt: item.imageAlt ?? item.competition,
+            width: item.imageWidth ?? 800,
+            height: item.imageHeight ?? 800,
+          }
+        : undefined,
+      externalUrl: item.externalUrl ?? undefined,
+    }));
+  } catch {
+    return achievementsMock[locale];
   }
 }
 

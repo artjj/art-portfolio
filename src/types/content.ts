@@ -49,6 +49,24 @@ export interface TimelineItem {
   description: string;
 }
 
+// Tipo semântico da conquista — o mapeamento pro emoji (🥇🥈🥉🏅) acontece
+// só no front-end (src/components/timeline/award-icon.tsx), nunca no CMS.
+export type AwardType = "first" | "second" | "third" | "special";
+
+// Destaque de medalhas/premiações em competições, exibido ao lado da
+// Trajetória — documento próprio no Sanity, independente dos marcos da
+// timeline (não é um TimelineItem).
+export interface Achievement {
+  id: string;
+  competition: string;
+  placement: string;
+  year: number;
+  awardType: AwardType;
+  category?: string;
+  image?: ImageAsset;
+  externalUrl?: string;
+}
+
 export interface PhilosophyContent {
   quote: string;
   body: string;

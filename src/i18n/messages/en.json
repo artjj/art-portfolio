@@ -25,6 +25,12 @@
     "intro": "My artistic research is centered on Dancehall and Krump, with complementary studies in other urban dance languages.",
     "complementaryTitle": "Complementary studies"
   },
+  "Timeline": {
+    "achievementsTitle": "Competition achievements",
+    "openDetails": "Open details: {placement} at {competition}, {year}",
+    "close": "Close",
+    "viewReference": "View reference"
+  },
   "Works": {
     "watchOnYoutube": "Watch on YouTube",
     "close": "Close",
