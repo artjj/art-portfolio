@@ -72,7 +72,7 @@ export function Hero({ content }: HeroProps) {
 
         <div className="hero-enter-2 flex flex-wrap items-center gap-4">
           <Button href="#works" variant="primary">
-            {t("watchReel")}
+            {t("worksCta")}
           </Button>
           <Button
             href="#contact"
