@@ -27,12 +27,29 @@ export function Contact({ content }: ContactProps) {
             </p>
 
             <div className="mt-10 flex flex-col items-start gap-4">
-              <Button href={content.instagramUrl} variant="primary">
+              <Button
+                href={content.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+              >
                 {t("instagramCta")}
               </Button>
               <div className="text-body-sm flex gap-6 underline underline-offset-4">
-                <a href={content.tiktokUrl}>{t("tiktokLabel")}</a>
-                <a href={`mailto:${content.email}`}>{t("emailCtaLabel")}</a>
+                <a
+                  href={content.tiktokUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("tiktokLabel")}
+                </a>
+                <a
+                  href={`mailto:${content.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("emailCtaLabel")}
+                </a>
               </div>
             </div>
           </div>
