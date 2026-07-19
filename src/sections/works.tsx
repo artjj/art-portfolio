@@ -22,7 +22,7 @@ export function Works({ works }: WorksProps) {
   const isCollection = !!activeWork?.choreographies;
 
   return (
-    <section id="works" className="py-24 md:py-32">
+    <section id="works" className="pt-24 pb-12 md:pt-32 md:pb-16">
       <Container>
         <Reveal>
           <h2 className="font-display text-h1 mb-12 tracking-tight uppercase">

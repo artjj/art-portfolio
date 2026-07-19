@@ -15,7 +15,7 @@ export function Timeline({ items, achievements }: TimelineProps) {
   const nav = useTranslations("Nav");
 
   return (
-    <section id="timeline" className="py-24 md:py-32">
+    <section id="timeline" className="py-12 md:py-16">
       <Container>
         <Reveal>
           <div className="mb-16 flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">

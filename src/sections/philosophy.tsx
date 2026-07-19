@@ -20,7 +20,7 @@ export function Philosophy({ content }: PhilosophyProps) {
   const parallaxY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
-    <section ref={sectionRef} id="philosophy" className="py-24 md:py-32">
+    <section ref={sectionRef} id="philosophy" className="py-12 md:py-16">
       <Container className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
         <div className="relative aspect-[4/5] w-full overflow-hidden md:order-2">
           {/* Placeholder em SVG — next/image bloqueia SVG por padrão. Trocar

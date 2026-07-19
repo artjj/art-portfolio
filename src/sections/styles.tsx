@@ -19,7 +19,7 @@ export function Styles({ styles }: StylesProps) {
   const complementary = styles.filter((style) => !style.featured);
 
   return (
-    <section id="styles" className="py-24 md:py-32">
+    <section id="styles" className="py-12 md:py-16">
       <Container>
         <Reveal>
           <h2 className="font-display text-h1 tracking-tight uppercase">
