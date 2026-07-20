@@ -39,6 +39,11 @@
     "open": "Assistir {title}"
   },
   "Contact": {
-    "emailCtaLabel": "Enviar e-mail"
+    "emailLabel": "E-mail",
+    "copyEmailAriaLabel": "Copiar endereço de e-mail",
+    "copiedLabel": "Copiado",
+    "copiedAnnouncement": "Endereço de e-mail copiado",
+    "copyErrorLabel": "Não copiado",
+    "copyErrorAnnouncement": "Não foi possível copiar o endereço de e-mail"
   }
 }

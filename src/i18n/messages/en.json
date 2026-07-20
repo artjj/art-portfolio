@@ -39,6 +39,11 @@
     "open": "Watch {title}"
   },
   "Contact": {
-    "emailCtaLabel": "Send an email"
+    "emailLabel": "Email",
+    "copyEmailAriaLabel": "Copy email address",
+    "copiedLabel": "Copied",
+    "copiedAnnouncement": "Email address copied",
+    "copyErrorLabel": "Not copied",
+    "copyErrorAnnouncement": "Couldn't copy the email address"
   }
 }
