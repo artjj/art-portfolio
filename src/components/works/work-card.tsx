@@ -1,35 +1,62 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { m } from "framer-motion";
 import type { Work } from "@/types/content";
+import { cn } from "@/lib/utils";
 
 interface WorkCardProps {
   work: Work;
   onOpen: () => void;
   openLabel: string;
+  // Definidos pelo coordenador de viewport em src/sections/works.tsx — só
+  // relevantes em touch/mobile; no desktop hover/foco continuam intactos.
+  isViewportActive?: boolean;
+  autoplayEnabled?: boolean;
+  cardRef?: (el: HTMLButtonElement | null) => void;
 }
 
-export function WorkCard({ work, onOpen, openLabel }: WorkCardProps) {
+export function WorkCard({
+  work,
+  onOpen,
+  openLabel,
+  isViewportActive = false,
+  autoplayEnabled = false,
+  cardRef,
+}: WorkCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const play = () => videoRef.current?.play().catch(() => {});
-  const pause = () => {
+  const pause = (resetTime: boolean) => {
     const video = videoRef.current;
     if (!video) return;
     video.pause();
-    video.currentTime = 0;
+    if (resetTime) video.currentTime = 0;
   };
+
+  // Mobile (viewport): ativado pelo card mais visível na tela. Ao ficar
+  // inativo, só pausa sem resetar — preserva o tempo caso volte a ficar
+  // visível numa pequena rolagem, em vez de reiniciar do zero.
+  useEffect(() => {
+    if (!work.previewVideo) return;
+    if (isViewportActive) {
+      play();
+    } else {
+      pause(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isViewportActive]);
 
   return (
     <button
+      ref={cardRef}
       type="button"
       onClick={onOpen}
       onMouseEnter={play}
-      onMouseLeave={pause}
+      onMouseLeave={() => pause(true)}
       onFocus={play}
-      onBlur={pause}
+      onBlur={() => pause(true)}
       aria-label={openLabel}
       className="group relative aspect-[4/5] w-full overflow-hidden text-left"
     >
@@ -53,8 +80,11 @@ export function WorkCard({ work, onOpen, openLabel }: WorkCardProps) {
             muted
             loop
             playsInline
-            preload="none"
-            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100"
+            preload={autoplayEnabled ? "metadata" : "none"}
+            className={cn(
+              "absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100",
+              isViewportActive && "opacity-100",
+            )}
           />
         )}
       </m.div>

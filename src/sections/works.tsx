@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { WorkCard } from "@/components/works/work-card";
 import { WorkModal } from "@/components/works/work-modal";
 import { ChoreographyGalleryModal } from "@/components/works/choreography-gallery-modal";
+import { useViewportAutoplay } from "@/hooks/use-viewport-autoplay";
 
 interface WorksProps {
   works: Work[];
@@ -17,6 +18,7 @@ export function Works({ works }: WorksProps) {
   const t = useTranslations("Works");
   const nav = useTranslations("Nav");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { activeId, autoplayEnabled, registerCard } = useViewportAutoplay();
 
   const activeWork = activeIndex === null ? null : works[activeIndex];
   const isCollection = !!activeWork?.choreographies;
@@ -37,6 +39,9 @@ export function Works({ works }: WorksProps) {
               work={work}
               onOpen={() => setActiveIndex(works.indexOf(work))}
               openLabel={t("open", { title: work.title })}
+              autoplayEnabled={autoplayEnabled}
+              isViewportActive={autoplayEnabled && activeId === work.id}
+              cardRef={work.previewVideo ? registerCard(work.id) : undefined}
             />
           ))}
         </div>
