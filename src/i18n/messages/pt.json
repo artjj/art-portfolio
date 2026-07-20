@@ -39,21 +39,6 @@
     "open": "Assistir {title}"
   },
   "Contact": {
-    "nameLabel": "Nome",
-    "namePlaceholder": "Seu nome",
-    "emailLabel": "E-mail",
-    "emailPlaceholder": "seu@email.com",
-    "messageLabel": "Mensagem",
-    "messagePlaceholder": "Conte um pouco sobre o projeto",
-    "send": "Enviar mensagem",
-    "sending": "Enviando...",
-    "success": "Mensagem enviada! Retorno em breve.",
-    "error": "Não foi possível enviar agora. Tente novamente.",
-    "nameRequired": "Informe seu nome.",
-    "emailInvalid": "Informe um e-mail válido.",
-    "messageRequired": "Escreva uma mensagem.",
-    "instagramCta": "Seguir no Instagram",
-    "tiktokLabel": "TikTok",
     "emailCtaLabel": "Enviar e-mail"
   }
 }
