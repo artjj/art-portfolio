@@ -32,7 +32,7 @@ export function Styles({ styles }: StylesProps) {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {featured.map((style) => (
-            <StyleCard key={style.id} style={style} className="aspect-[5/2]" />
+            <StyleCard key={style.id} style={style} />
           ))}
         </div>
 
