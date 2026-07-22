@@ -34,12 +34,21 @@ export interface Work {
 
 export type DanceStyleId = "dancehall" | "krump" | "hiphop" | "popping";
 
+// `featured` já classifica principal/complementar — não duplicar num campo
+// à parte só pra rotular o modal (o rótulo é derivado no front-end).
+// Campos abaixo alimentam o modal de trajetória; todos opcionais porque nem
+// todo estilo tem esse texto escrito ainda (ver StyleModal — card e modal
+// continuam funcionando normalmente com o que estiver disponível).
 export interface DanceStyle {
   id: DanceStyleId;
   name: string;
   description: string;
   featured: boolean;
   image: ImageAsset;
+  trajectory?: string;
+  mentors?: string;
+  currentStatus?: string;
+  modalImage?: ImageAsset;
 }
 
 export interface TimelineItem {

@@ -24,7 +24,13 @@
   },
   "Styles": {
     "intro": "Minha pesquisa artística se desenvolve principalmente no Dancehall e no Krump, com estudos complementares em outras linguagens da dança urbana.",
-    "complementaryTitle": "Estudos complementares"
+    "complementaryTitle": "Estudos complementares",
+    "openLabel": "Ver trajetória em {name}",
+    "categoryFeatured": "Pesquisa principal",
+    "categoryComplementary": "Estudo complementar",
+    "mentorsLabel": "Professores e referências",
+    "statusLabel": "Estado atual",
+    "close": "Fechar"
   },
   "Timeline": {
     "achievementsTitle": "Conquistas em competições",

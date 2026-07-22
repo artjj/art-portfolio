@@ -35,7 +35,7 @@ export const worksQuery = /* groq */ `
 }`;
 
 export const stylesQuery = /* groq */ `
-*[_type == "danceStyle"]{
+*[_type == "danceStyle"] | order(order asc){
   "id": styleId,
   name,
   "description": description[$locale],
@@ -44,6 +44,12 @@ export const stylesQuery = /* groq */ `
   "imageAlt": name,
   "imageWidth": image.asset->metadata.dimensions.width,
   "imageHeight": image.asset->metadata.dimensions.height,
+  "trajectory": trajectory[$locale],
+  "mentors": mentors[$locale],
+  "currentStatus": currentStatus[$locale],
+  "modalImageUrl": modalImage.asset->url,
+  "modalImageWidth": modalImage.asset->metadata.dimensions.width,
+  "modalImageHeight": modalImage.asset->metadata.dimensions.height,
 }`;
 
 export const timelineQuery = /* groq */ `

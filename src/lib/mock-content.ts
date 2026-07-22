@@ -199,6 +199,10 @@ export const stylesContent: Record<Locale, DanceStyle[]> = {
         width: 1200,
         height: 1500,
       },
+      trajectory:
+        "[Placeholder] Parágrafo sobre quando comecei no Dancehall e com quem aprendi — a definir.\n\n[Placeholder] Parágrafo sobre referências e experiências relevantes — a definir.\n\n[Placeholder] Parágrafo sobre como o Dancehall influencia minha pesquisa artística atual — a definir.",
+      mentors: "[Placeholder] Professores/referências — a definir.",
+      currentStatus: "[Placeholder] Estado atual do estudo — a definir.",
     },
     {
       id: "krump",
@@ -211,6 +215,10 @@ export const stylesContent: Record<Locale, DanceStyle[]> = {
         width: 1200,
         height: 1500,
       },
+      trajectory:
+        "[Placeholder] Parágrafo sobre quando comecei no Krump e com quem aprendi — a definir.\n\n[Placeholder] Parágrafo sobre referências e experiências relevantes — a definir.\n\n[Placeholder] Parágrafo sobre como o Krump influencia minha pesquisa artística atual — a definir.",
+      mentors: "[Placeholder] Professores/referências — a definir.",
+      currentStatus: "[Placeholder] Estado atual do estudo — a definir.",
     },
     {
       id: "hiphop",
@@ -249,6 +257,10 @@ export const stylesContent: Record<Locale, DanceStyle[]> = {
         width: 1200,
         height: 1500,
       },
+      trajectory:
+        "[Placeholder] Paragraph about when I started in Dancehall and who I learned from — TBD.\n\n[Placeholder] Paragraph about references and relevant experiences — TBD.\n\n[Placeholder] Paragraph about how Dancehall influences my current artistic research — TBD.",
+      mentors: "[Placeholder] Mentors/references — TBD.",
+      currentStatus: "[Placeholder] Current status of the study — TBD.",
     },
     {
       id: "krump",
@@ -261,6 +273,10 @@ export const stylesContent: Record<Locale, DanceStyle[]> = {
         width: 1200,
         height: 1500,
       },
+      trajectory:
+        "[Placeholder] Paragraph about when I started in Krump and who I learned from — TBD.\n\n[Placeholder] Paragraph about references and relevant experiences — TBD.\n\n[Placeholder] Paragraph about how Krump influences my current artistic research — TBD.",
+      mentors: "[Placeholder] Mentors/references — TBD.",
+      currentStatus: "[Placeholder] Current status of the study — TBD.",
     },
     {
       id: "hiphop",

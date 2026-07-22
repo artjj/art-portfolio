@@ -130,6 +130,17 @@ export async function getStylesContent(locale: Locale): Promise<DanceStyle[]> {
         width: item.imageWidth ?? 1200,
         height: item.imageHeight ?? 1500,
       },
+      trajectory: item.trajectory || undefined,
+      mentors: item.mentors || undefined,
+      currentStatus: item.currentStatus || undefined,
+      modalImage: item.modalImageUrl
+        ? {
+            url: item.modalImageUrl,
+            alt: item.imageAlt ?? item.name,
+            width: item.modalImageWidth ?? 1200,
+            height: item.modalImageHeight ?? 1500,
+          }
+        : undefined,
     }));
   } catch {
     return stylesMock[locale];
