@@ -19,6 +19,7 @@
   },
   "Hero": {
     "worksCta": "Featured Works",
+    "resumeCta": "Artistic résumé",
     "scrollHint": "Scroll to explore"
   },
   "Styles": {
@@ -45,5 +46,12 @@
     "copiedAnnouncement": "Email address copied",
     "copyErrorLabel": "Not copied",
     "copyErrorAnnouncement": "Couldn't copy the email address"
+  },
+  "Resume": {
+    "modalTitle": "Artistic résumé",
+    "close": "Close",
+    "openInNewTab": "Open in new tab",
+    "download": "Download PDF",
+    "previewUnavailable": "Couldn't display the PDF preview."
   }
 }

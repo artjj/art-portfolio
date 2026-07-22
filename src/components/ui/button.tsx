@@ -13,14 +13,22 @@ const variants: Record<ButtonVariant, string> = {
     "border border-border bg-transparent text-fg hover:border-accent-text hover:text-accent-text",
 };
 
+// Callback ref único pros dois ramos (button/anchor) — um nome de prop
+// próprio em vez de `ref` porque o componente ainda não usa forwardRef.
+type ButtonTriggerRef = (
+  el: HTMLButtonElement | HTMLAnchorElement | null,
+) => void;
+
 type ButtonAsButton = ButtonHTMLAttributes<HTMLButtonElement> & {
   href?: undefined;
   variant?: ButtonVariant;
+  triggerRef?: ButtonTriggerRef;
 };
 
 type ButtonAsAnchor = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
   variant?: ButtonVariant;
+  triggerRef?: ButtonTriggerRef;
 };
 
 type ButtonProps = ButtonAsButton | ButtonAsAnchor;
@@ -30,13 +38,14 @@ type ButtonProps = ButtonAsButton | ButtonAsAnchor;
 export function Button({
   className,
   variant = "primary",
+  triggerRef,
   ...props
 }: ButtonProps) {
   const classes = cn(base, variants[variant], className);
 
   if (props.href !== undefined) {
-    return <a className={classes} {...props} />;
+    return <a ref={triggerRef} className={classes} {...props} />;
   }
 
-  return <button className={classes} {...props} />;
+  return <button ref={triggerRef} className={classes} {...props} />;
 }

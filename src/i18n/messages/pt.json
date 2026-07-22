@@ -19,6 +19,7 @@
   },
   "Hero": {
     "worksCta": "Principais trabalhos",
+    "resumeCta": "Currículo artístico",
     "scrollHint": "Rolar para explorar"
   },
   "Styles": {
@@ -45,5 +46,12 @@
     "copiedAnnouncement": "Endereço de e-mail copiado",
     "copyErrorLabel": "Não copiado",
     "copyErrorAnnouncement": "Não foi possível copiar o endereço de e-mail"
+  },
+  "Resume": {
+    "modalTitle": "Currículo artístico",
+    "close": "Fechar",
+    "openInNewTab": "Abrir em nova guia",
+    "download": "Baixar PDF",
+    "previewUnavailable": "Não foi possível exibir a pré-visualização do PDF."
   }
 }
