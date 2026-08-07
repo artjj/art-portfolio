@@ -36,7 +36,11 @@ export async function getHeroContent(locale: Locale): Promise<HeroContent> {
   if (!sanityClient) return heroMock[locale];
 
   try {
-    const data = await sanityClient.fetch(heroQuery, { locale });
+    const data = await sanityClient.fetch(
+      heroQuery,
+      { locale },
+      { next: { tags: ["hero"] } },
+    );
     if (!data?.headline || !data?.posterUrl) return heroMock[locale];
 
     return {
@@ -61,7 +65,11 @@ export async function getWorksContent(locale: Locale): Promise<Work[]> {
   if (!sanityClient) return worksMock[locale];
 
   try {
-    const data = await sanityClient.fetch(worksQuery, { locale });
+    const data = await sanityClient.fetch(
+      worksQuery,
+      { locale },
+      { next: { tags: ["works"] } },
+    );
     if (!Array.isArray(data) || data.length === 0) return worksMock[locale];
 
     return data.map((item): Work => ({
@@ -116,7 +124,11 @@ export async function getStylesContent(locale: Locale): Promise<DanceStyle[]> {
   if (!sanityClient) return stylesMock[locale];
 
   try {
-    const data = await sanityClient.fetch(stylesQuery, { locale });
+    const data = await sanityClient.fetch(
+      stylesQuery,
+      { locale },
+      { next: { tags: ["styles"] } },
+    );
     if (!Array.isArray(data) || data.length === 0) return stylesMock[locale];
 
     return data.map((item): DanceStyle => ({
@@ -153,7 +165,11 @@ export async function getTimelineContent(
   if (!sanityClient) return timelineMock[locale];
 
   try {
-    const data = await sanityClient.fetch(timelineQuery, { locale });
+    const data = await sanityClient.fetch(
+      timelineQuery,
+      { locale },
+      { next: { tags: ["timeline"] } },
+    );
     if (!Array.isArray(data) || data.length === 0) return timelineMock[locale];
     return data as TimelineItem[];
   } catch {
@@ -182,7 +198,11 @@ export async function getAchievementsContent(
   if (!sanityClient) return achievementsMock[locale];
 
   try {
-    const data = await sanityClient.fetch(achievementsQuery, { locale });
+    const data = await sanityClient.fetch(
+      achievementsQuery,
+      { locale },
+      { next: { tags: ["achievements"] } },
+    );
     if (!Array.isArray(data)) return achievementsMock[locale];
 
     return data.map((item): Achievement => ({
@@ -213,7 +233,11 @@ export async function getPhilosophyContent(
   if (!sanityClient) return philosophyMock[locale];
 
   try {
-    const data = await sanityClient.fetch(philosophyQuery, { locale });
+    const data = await sanityClient.fetch(
+      philosophyQuery,
+      { locale },
+      { next: { tags: ["philosophy"] } },
+    );
     if (!data?.quote || !data?.imageUrl) return philosophyMock[locale];
 
     return {
@@ -237,7 +261,11 @@ export async function getContactContent(
   if (!sanityClient) return contactMock[locale];
 
   try {
-    const data = await sanityClient.fetch(contactQuery, { locale });
+    const data = await sanityClient.fetch(
+      contactQuery,
+      { locale },
+      { next: { tags: ["contact"] } },
+    );
     if (!data?.title || !data?.email) return contactMock[locale];
     return data as ContactContent;
   } catch {
