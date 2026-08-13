@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { Container } from "./container";
+import { Logo } from "./logo";
 import { MobileMenu } from "./mobile-menu";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { navLinks } from "@/lib/nav-links";
@@ -29,11 +30,8 @@ export function Navbar() {
         )}
       >
         <Container className="flex h-20 items-center justify-between">
-          <a
-            href="#top"
-            className="font-display text-h3 tracking-tight uppercase"
-          >
-            {common("siteName")}
+          <a href="#top" aria-label={common("siteName")}>
+            <Logo className="h-7" />
           </a>
 
           <nav className="text-body-sm hidden items-center gap-8 md:flex">
